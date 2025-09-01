@@ -1,0 +1,77 @@
+<head>
+  <title>days until counter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap" rel="stylesheet">
+</head>
+<input type="date" class="hid" id="input">
+<button onclick="window.location.href = `?date=${encodeURIComponent(document.querySelector('#input').value)}`" id="but">
+  ee
+</button>
+<h1>
+  
+</h1>
+<button onclick="back()" style="display:none" id="backb">
+  back
+</button>
+<script>
+ const urll = new URL(window.location.href)
+   if(urll.searchParams.has("date")){update(urll.searchParams.get("date").toString()); document.querySelector('#input').style.display = 'none'; document.querySelector('#but').style.display = 'none'; document.querySelector('#backb').style.display = 'block'}   
+function update(datearg){
+var input = datearg
+
+if(input.split('-')[1][0] == 0){
+    input = `${input.split('-')[0]}-${input.split('-')[1][1]}-${input.split('-')[2]}`
+  }
+       if(input.split('-')[2][0] == 0){
+    input = `${input.split('-')[0]}-${input.split('-')[1]}-${input.split('-')[2][1]}`
+  }
+var dater = new Date()
+var date = new Date(input)
+var monthss = 0
+var months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+var weekdays = ["Sun", "Mon", "Tue", "Wen", "Thu", "Fri", "Sat"]
+var days = (year) => {if(!(year / 4).toString().includes('.')){return 366} else{return 365}}
+if(!(dater.getFullYear() / 4).toString().includes('.')){months[1] = 29}
+let isleapyear = (year) => {if(!(year / 4).toString().includes('.')){return false} else{return true}}
+var currentday = (datee) => {var bob = 0;for(var i = 0; i < (datee.getMonth()); i++){bob+= months[i]}; return [bob + datee.getDate(), weekdays[datee.getDay()], days(datee.getFullYear()) - (bob + datee.getDate())]}
+var info = {dayofyear: currentday(date)[0], dayofweek: date.getDay(), dayofweekstring: currentday(date)[1], daysofyear: days(date.getFullYear()), daysleftofyear: currentday(date)[2], month: date.getMonth()}
+var infor = {dayofyear: currentday(dater)[0], dayofweek: dater.getDay(), dayofweekstring: currentday(dater)[1], daysofyear: days(dater.getFullYear()), daysleftofyear: currentday(dater)[2], month: dater.getMonth()}
+if(date.getFullYear() != dater.getFullYear()){
+    monthss+=(12 - infor.month)
+  var dif = date.getFullYear() - dater.getFullYear()
+  var dayss = infor.daysleftofyear
+  for(var i = 0; i < (dif - 1); i++){monthss+=12 ;dayss = dayss + days(dater.getFullYear() + i)}
+  dayss = dayss + info.dayofyear
+}
+  else{var dayss = info.dayofyear - infor.dayofyear}
+if((info.month != infor.month) && (date.getFullYear() == dater.getFullYear())){
+if(date.getFullYear() != dater.getFullYear()){var anum = (info.month)} else if(info.month != infor.month){var anum = info.month}
+  if(date.getDate() >= dater.getDate()){monthss++}
+  for(var i = 0; i < (info.month - infor.month - 1); i++){
+    monthss++
+  }
+}
+if((info.month == infor.month) && (date.getFullYear() != dater.getFullYear())){
+monthss = (date.getFullYear() - dater.getFullYear()) * 12
+}
+var weeks = Math.floor(dayss / 7)
+  var weeksdays = `${weeks} weeks ${dayss % 7} day`
+  var weekdays = dayss - (weeks * 2)
+ // if(info.dayofweek == 6){weekdays = weekdays - 1} else if(info.dayofweek == 0){weekdays = weekdays - 2}
+  var output = `${dayss} days
+  months: ${monthss}
+  ${weeksdays}/s
+  weekdays:${weekdays}
+  until ${input}`
+  document.querySelector('h1').innerText = output
+  document.title = output
+setTimeout(() => {update(datearg)}, 1000)
+}
+  
+
+function back(){window.location.href = `${(window.location.href).slice(0,(window.location.href).indexOf("?"))}`}
+</script>
+<style>
+  *{font-family:Parkinsans}
+</style>
