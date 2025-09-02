@@ -6,7 +6,7 @@
 </head>
 <input type="date" class="hid" id="input">
 <button onclick="window.location.href = `?date=${encodeURIComponent(document.querySelector('#input').value)}`" id="but">
-  ee
+  set date
 </button>
 <h1>
   
@@ -74,4 +74,8 @@ function back(){window.location.href = `${(window.location.href).slice(0,(window
 </script>
 <style>
   *{font-family:Parkinsans}
+  #but{
+  background-color: #00008B;
+  color: white;
+  }
 </style>
