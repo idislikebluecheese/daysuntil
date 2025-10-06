@@ -52,8 +52,10 @@ if(date.getFullYear() != dater.getFullYear()){var anum = (info.month)} else if(i
     monthss++
   }
 }
-if((info.month == infor.month) && (date.getFullYear() != dater.getFullYear())){
-monthss = (date.getFullYear() - dater.getFullYear()) * 12
+if(date.getFullYear() > dater.getFullYear()){
+let mleft =  12 - dater.getMonth()
+let yb = (dif - 1) * 12
+date.getDate() <= dater.getDate()? monthss = ((date.getMonth() + mleft) + yb) - 1 : monthss = (date.getMonth() + mleft) + yb
 }
 var weeks = Math.floor(dayss / 7)
   var weeksdays = `${weeks} weeks ${dayss % 7} day`
