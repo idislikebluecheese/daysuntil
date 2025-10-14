@@ -31,7 +31,7 @@ var date = new Date(input)
 var monthss = 0
 var months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 var weekdays = ["Sun", "Mon", "Tue", "Wen", "Thu", "Fri", "Sat"]
-var days = (year) => {if(!(year / 4).toString().includes('.')){return 366} else{return 365}}
+var days = (year) => {if(!((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0))){return 365} else{return 366}}
 if(!(dater.getFullYear() / 4).toString().includes('.')){months[1] = 29}
 let isleapyear = (year) => {if(!(year / 4).toString().includes('.')){return false} else{return true}}
 var currentday = (datee) => {var bob = 0;for(var i = 0; i < (datee.getMonth()); i++){bob+= months[i]}; return [bob + datee.getDate(), weekdays[datee.getDay()], days(datee.getFullYear()) - (bob + datee.getDate())]}
@@ -68,7 +68,6 @@ var weeks = Math.floor(dayss / 7)
   until ${input}`
   document.querySelector('h1').innerText = output
   document.title = output
-setTimeout(() => {update(datearg)}, 1000)
 }
   
 
